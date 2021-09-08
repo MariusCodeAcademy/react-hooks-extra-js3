@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 function slowFunction(num) {
   console.log('slowFunction RAN');
@@ -12,7 +12,10 @@ export default function Counter() {
   const [number, setNumber] = useState(0);
   const [themeOn, setThemeOn] = useState(false);
 
-  const numberCalculated = slowFunction(number);
+  // isiminti rezultata jei neopasikeite kintamieji
+  const numberCalculated = useMemo(() => {
+    return slowFunction(number);
+  }, [number]);
 
   function themeHandler() {
     setThemeOn((prevState) => !prevState);
